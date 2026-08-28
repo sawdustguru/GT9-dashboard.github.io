@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Countdown & Analog Clock with Numbers</title>
+  <title>Countdown & Scaled Analog Clock</title>
   <style>
     /* Centers the clock system relative to the browser frame */
     body {
@@ -55,13 +55,13 @@
       white-space: nowrap;
     }
 
-    /* Fluid Matching Analog Panel */
+    /* Slightly smaller Analog Panel */
     .analog-box {
-      border-radius: 50%; /* Circle profile */
-      flex: 1;
-      aspect-ratio: 1 / 1; /* Retains circle layout when width/height alter */
-      max-width: 320px;
-      min-width: 180px; /* Increased slightly to protect layout room for numbers */
+      border-radius: 50%; 
+      flex: 0.8; /* Reduced from 1 to make it scale smaller than before */
+      aspect-ratio: 1 / 1; 
+      max-width: 240px; /* Reduced from 320px to keep it compact */
+      min-width: 150px; 
       width: 100%;
       position: relative;
     }
@@ -75,10 +75,9 @@
       color: white;
       font-family: 'arial', sans-serif;
       font-weight: bold;
-      font-size: calc(1vw + 0.6rem); /* Scalable number text */
-      padding: 4%; /* Inset from the outer border rim */
+      font-size: calc(0.8vw + 0.6rem); /* Scaled down slightly for the smaller face */
+      padding: 5%; /* Adjusted spacing for the smaller frame */
       box-sizing: border-box;
-      /* Rotate container element to index point, rotate number backwards to keep text upright */
       transform: rotate(calc(var(--rotation) * 1deg));
     }
     .number span {
@@ -138,13 +137,13 @@
         width: 100%;
       }
       .analog-box {
-        width: 55%;
+        width: 45%; /* Slightly smaller footprint on narrow screens too */
       }
       .clock {
         font-size: 11vw;
       }
       .number {
-        font-size: calc(2vw + 0.5rem);
+        font-size: calc(1.8vw + 0.5rem);
       }
     }
   </style>
@@ -161,7 +160,7 @@
 
     <!-- Companion Analog Regular Time Module -->
     <div class="clock-container analog-box">
-      <!-- Face Numbers (30 degree step increments) -->
+      <!-- Face Numbers -->
       <div class="number" style="--rotation: 30;"><span>1</span></div>
       <div class="number" style="--rotation: 60;"><span>2</span></div>
       <div class="number" style="--rotation: 90;"><span>3</span></div>
@@ -225,7 +224,6 @@
       hourHand.style.transform = `translateX(-50%) rotate(${hourDegrees}deg)`;
     }
 
-    // Initialize layout immediately
     updateDashboard();
     setInterval(updateDashboard, 1000);
   </script>
